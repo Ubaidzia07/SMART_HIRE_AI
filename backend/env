@@ -1,0 +1,3 @@
+DATABASE_URL=postgresql+psycopg2://smarthire_user:smarthire_pass@localhost:5432/smarthire
+UPLOAD_DIR=./uploads
+MAX_UPLOAD_SIZE=5242880

@@ -1,0 +1,42 @@
+########################################
+# 🤖 AI / Semantic Search (CPU-Only)
+########################################
+# This line tells pip to ADD the PyTorch CPU index
+# in ADDITION to the default PyPI index.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Explicitly list the torch libraries.
+# sentence-transformers will see these are installed and use them.
+torch
+torchvision
+torchaudio
+
+sentence-transformers  # (This will now be found on PyPI)
+pgvector
+pandas
+
+########################################
+# 🚀 Core Framework & Server
+########################################
+fastapi
+uvicorn[standard]
+python-multipart
+
+########################################
+# 🗃️ Database, ORM & Migrations
+########################################
+sqlalchemy
+psycopg2-binary
+python-dotenv
+alembic
+
+########################################
+# 📄 Resume & File Processing
+########################################
+pdfplumber
+python-docx
+
+########################################
+# 📡 Network Client
+########################################
+requests

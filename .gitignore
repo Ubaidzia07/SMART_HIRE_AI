@@ -1,0 +1,25 @@
+# Python virtual environment
+/myenv/
+/venv/
+/.venv/
+env/
+*/__pycache__/
+*.pyc
+
+# Environment files
+# NEVER commit these. They contain secrets!
+.env
+*.env
+.env.*
+
+# Uploaded Data
+# We don't want to commit user resumes to our repo
+/backend/src/uploads/
+
+# IDE / OS specific
+.idea/
+.vscode/
+.DS_Store
+
+# Docker cache
+.dockerignore

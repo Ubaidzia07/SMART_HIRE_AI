@@ -1,0 +1,65 @@
+services:
+  # -----------------------------------------------------------------
+  # This 'backend' service is UPDATED for our Week 1 FastAPI plan
+  # -----------------------------------------------------------------
+  
+  # --- FIX IS HERE ---
+  # 'backend:' must be indented two spaces,
+  # just like 'frontend:' and 'db:'.
+
+
+  backend:
+    build: ./backend
+    container_name: smarthire-backend
+    command: uvicorn src.app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://postgres:password@db:5432/smarthire_db
+    depends_on:
+      - db
+    volumes:
+      # This is your existing mount for code
+      - ./backend/src:/app/src
+      # --- THIS IS THE NEW, CRITICAL LINE ---
+      # Mount the alembic folder so migration files are saved to your host
+      - ./backend/alembic:/app/alembic
+      # ------------------------------------
+      # This is your existing mount for uploads
+      - ./backend/src/uploads:/app/src/uploads
+    restart: always
+
+  # -----------------------------------------------------------------
+  # Your 'frontend' service - no changes needed, it's correct
+  # -----------------------------------------------------------------
+  frontend:
+    build: ./frontend
+    container_name: smarthire-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    command: bash -c "python3 -m http.server 3000"
+    depends_on:
+      - backend
+    restart: always
+
+  # -----------------------------------------------------------------
+  # Your 'db' service - using your persistent './data/postgres' mount
+  # -----------------------------------------------------------------
+  db:
+    image: pgvector/pgvector:pg15
+    container_name: smarthire-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=smarthire_db
+    volumes:
+      # This is your 'old version' setup. It's good!
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+# We do not need a top-level 'volumes:' key
+# because you are bind-mounting './data/postgres' directly.
