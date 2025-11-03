@@ -1,25 +1,27 @@
-# Python virtual environment
-/myenv/
-/venv/
-/.venv/
+# Python
+myenv/
+venv/
+.venv/
 env/
-*/__pycache__/
-*.pyc
+ *.pyc
+__pycache__/
 
-# Environment files
-# NEVER commit these. They contain secrets!
-.env
+# Docker Data
+# This is the most important rule. NEVER commit your database.
+data/
+data/postgres/
+.dockerignore
+
+# Secrets
+# Never commit your .env files
 *.env
+.env
 .env.*
 
-# Uploaded Data
-# We don't want to commit user resumes to our repo
-/backend/src/uploads/
+# Archives
+*.zip
 
-# IDE / OS specific
+# IDE / OS
 .idea/
 .vscode/
-.DS_Store
-
-# Docker cache
-.dockerignore
+ .DS_Store
